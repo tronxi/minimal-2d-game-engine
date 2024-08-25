@@ -2,18 +2,20 @@ package dev.tronxi;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
-import dev.tronxi.game.Game;
-import dev.tronxi.game.listeners.GlobalKeyListener;
-import dev.tronxi.game.listeners.InputListener;
+import dev.tronxi.engine.Game;
+import dev.tronxi.engine.listeners.GlobalKeyListener;
+import dev.tronxi.engine.listeners.InputListener;
 
 public class Main {
 
   public Main() {
-    setKeyListeners();
-    initGame();
+    InputListener inputListener = new InputListener();
+    Game game = new Game(inputListener);
+    setKeyListeners(inputListener);
+    game.start();
   }
 
-  private void setKeyListeners() {
+  private void setKeyListeners(InputListener inputListener) {
     try {
       GlobalScreen.registerNativeHook();
     }
@@ -22,11 +24,7 @@ public class Main {
       System.err.println(ex.getMessage());
       System.exit(1);
     }
-    GlobalScreen.addNativeKeyListener(new GlobalKeyListener(new InputListener()));
-  }
-
-  private void initGame() {
-    new Game().start();
+    GlobalScreen.addNativeKeyListener(new GlobalKeyListener(inputListener));
   }
 
   public static void main(String[] args) {

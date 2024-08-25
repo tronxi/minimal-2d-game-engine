@@ -1,4 +1,4 @@
-package dev.tronxi.game.screens.cli;
+package dev.tronxi.engine.screens.cli;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,7 +19,15 @@ public class CLIUtils {
       System.err.println("Error while clearing console");
       System.err.println(e.getMessage());
     }
+  }
 
+  public static void sleep(long millis) {
+    try {
+      Thread.sleep(millis);
+    } catch (InterruptedException e) {
+      System.err.println("Error while sleep");
+      System.err.println(e.getMessage());
+    }
   }
 
 
