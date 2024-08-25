@@ -42,7 +42,23 @@ public class Game {
     this.elements.add(new ObstacleElement("#", new Position(12, 16), elements, dimension));
     this.elements.add(new ObstacleElement("#", new Position(13, 15), elements, dimension));
     this.elements.add(new ObstacleElement("#", new Position(14, 14), elements, dimension));
-    this.elements.add(new ObstacleElement("#", new Position(15, 13), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(15, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(16, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(17, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(18, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(19, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(20, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(21, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(22, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(23, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(24, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(25, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(27, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(28, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(29, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(30, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(31, 19), elements, dimension));
+    this.elements.add(new ObstacleElement("#", new Position(32, 19), elements, dimension));
   }
 
   public void start() {

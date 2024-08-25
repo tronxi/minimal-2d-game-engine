@@ -6,6 +6,7 @@ import dev.tronxi.engine.listeners.InputListener;
 import java.util.List;
 
 public class MainElement extends Element {
+  private boolean mustDown = true;
 
   public MainElement(String representation, Position position, List<Element> elements,
       Dimension dimension) {
@@ -23,9 +24,12 @@ public class MainElement extends Element {
 
   @Override
   public void update() {
-    if (!hasRepresentationDown("#")) {
-      position.down();
+    if(mustDown) {
+      if (!hasRepresentationDown("#")) {
+        position.down();
+      }
     }
+    mustDown = !mustDown;
   }
 
   @Override
