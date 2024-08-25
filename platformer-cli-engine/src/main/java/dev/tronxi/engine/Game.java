@@ -17,7 +17,7 @@ public class Game {
 
   public Game(InputListener inputListener) {
     dimension = new Dimension(200, 20, 80, 40);
-    this.elements = new CopyOnWriteArrayList<Element>();
+    this.elements = new CopyOnWriteArrayList<>();
     this.screen = new CLIScreen(dimension, elements);
 
     Element mainElement = new MainElement("^", new Position(0, 0), elements, dimension, inputListener);
