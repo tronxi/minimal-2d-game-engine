@@ -48,6 +48,13 @@ public abstract class Element {
     inputListener.registerElement(this);
   }
 
+  protected boolean hasRepresentationUp(String representation) {
+    Position downPosition = new Position(position.getWidth(), position.getHeight() - 1);
+    return elements.stream()
+        .anyMatch(element -> element.position.equals(downPosition) && element.representation.equals(
+            representation));
+  }
+
   protected boolean hasRepresentationDown(String representation) {
     Position downPosition = new Position(position.getWidth(), position.getHeight() + 1);
     return elements.stream()

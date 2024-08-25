@@ -30,18 +30,30 @@ public class MainElement extends Element {
 
   @Override
   public void handleInput(String key) {
-    if (key.equals("D")) {
-      if (!hasRepresentationRight("#")) {
-        position.right();
+    switch (key) {
+      case "D" -> {
+        if (!hasRepresentationRight("#")) {
+          position.right();
+        }
       }
-    } else if (key.equals("A")) {
-      if (!hasRepresentationLeft("#")) {
-        position.left();
+      case "A" -> {
+        if (!hasRepresentationLeft("#")) {
+          position.left();
+        }
       }
-    } else if (key.equals("W")) {
-      position.up();
-      position.up();
-      position.up();
+      case "W" -> {
+        if (hasRepresentationDown("#")) {
+          if (!hasRepresentationUp("#")) {
+            position.up();
+          }
+          if (!hasRepresentationUp("#")) {
+            position.up();
+          }
+          if (!hasRepresentationUp("#")) {
+            position.up();
+          }
+        }
+      }
     }
     dimension.setWidthVisibleCenter(position.getWidth());
   }
