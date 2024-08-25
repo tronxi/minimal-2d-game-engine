@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>dev.tronxi</groupId>
-  <artifactId>platformer-cli-engine</artifactId>
+  <artifactId>minimal-2d-game-engine</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
