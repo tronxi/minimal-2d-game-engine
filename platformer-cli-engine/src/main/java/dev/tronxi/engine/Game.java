@@ -6,8 +6,8 @@ import dev.tronxi.engine.elements.ObstacleElement;
 import dev.tronxi.engine.listeners.InputListener;
 import dev.tronxi.engine.screens.Screen;
 import dev.tronxi.engine.screens.cli.CLIScreen;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Game {
 
@@ -17,7 +17,7 @@ public class Game {
 
   public Game(InputListener inputListener) {
     dimension = new Dimension(200, 20, 80, 40);
-    this.elements = new ArrayList<>();
+    this.elements = new CopyOnWriteArrayList<Element>();
     this.screen = new CLIScreen(dimension, elements);
 
     Element mainElement = new MainElement("^", new Position(0, 0), elements, dimension, inputListener);

@@ -76,4 +76,10 @@ public abstract class Element {
             representation));
   }
 
+  protected void remove() {
+    elements.removeIf(
+        element -> element.position.equals(this.position) && element.representation.equals(
+            this.representation));
+  }
+
 }

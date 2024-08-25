@@ -54,6 +54,9 @@ public class MainElement extends Element {
           }
         }
       }
+      case "Q" -> {
+        elements.add(new ShotElement(">", new Position(position.getWidth(), position.getHeight()), elements, dimension));
+      }
     }
     dimension.setWidthVisibleCenter(position.getWidth());
   }
