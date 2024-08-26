@@ -1,6 +1,7 @@
 package dev.tronxi.engine.elements;
 
 import dev.tronxi.engine.Dimension;
+import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
 import dev.tronxi.engine.listeners.InputListener;
 import java.util.List;
@@ -8,25 +9,20 @@ import java.util.List;
 public class MainElement extends Element {
   private boolean mustDown = true;
 
-  public MainElement(String representation, Position position, List<Element> elements,
-      Dimension dimension) {
-    super(representation, position, elements, dimension);
-  }
-
-  public MainElement(String representation, Position position, List<Element> elements,
-      Dimension dimension, InputListener inputListener) {
-    super(representation, position, elements, dimension, inputListener);
+  public MainElement(String representation, Position position, Game game) {
+    super(representation, position, game);
   }
 
   @Override
   public void start() {
+    registerForHandleInput(inputListener());
   }
 
   @Override
   public void update() {
     if(mustDown) {
       if (!hasRepresentationDown("#")) {
-        position.down();
+        position().down();
       }
     }
     mustDown = !mustDown;
@@ -37,31 +33,31 @@ public class MainElement extends Element {
     switch (key) {
       case "D" -> {
         if (!hasRepresentationRight("#")) {
-          position.right();
+          position().right();
         }
       }
       case "A" -> {
         if (!hasRepresentationLeft("#")) {
-          position.left();
+          position().left();
         }
       }
       case "W" -> {
         if (hasRepresentationDown("#")) {
           if (!hasRepresentationUp("#")) {
-            position.up();
+            position().up();
           }
           if (!hasRepresentationUp("#")) {
-            position.up();
+            position().up();
           }
           if (!hasRepresentationUp("#")) {
-            position.up();
+            position().up();
           }
         }
       }
       case "Q" -> {
-        elements.add(new ShotElement(">", new Position(position.getWidth(), position.getHeight()), elements, dimension));
+        elements().add(new ShotElement(">", new Position(position().getWidth(), position().getHeight()), game()));
       }
     }
-    dimension.setWidthVisibleCenter(position.getWidth());
+    dimension().setWidthVisibleCenter(position().getWidth());
   }
 }

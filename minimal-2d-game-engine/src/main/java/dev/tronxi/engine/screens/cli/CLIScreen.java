@@ -23,7 +23,7 @@ public class CLIScreen extends Screen {
         if (dimension.isInDimension(currentPosition)) {
           Optional<Element> maybeElement = findElementByPosition(currentPosition);
           maybeElement.ifPresentOrElse(
-              element -> System.out.print(element.getRepresentation()),
+              element -> System.out.print(element.representation()),
               () -> System.out.print(" "));
         }
       }

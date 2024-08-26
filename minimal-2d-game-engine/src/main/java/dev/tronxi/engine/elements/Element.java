@@ -1,40 +1,45 @@
 package dev.tronxi.engine.elements;
 
 import dev.tronxi.engine.Dimension;
+import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
 import dev.tronxi.engine.listeners.InputListener;
 import java.util.List;
 
 public abstract class Element {
 
-  protected final Position position;
-  protected final Dimension dimension;
-  protected final List<Element> elements;
+  private final Position position;
   private final String representation;
+  private final Game game;
 
-  public Element(String representation, Position position, List<Element> elements,
-      Dimension dimension) {
+  public Element(String representation, Position position, Game game) {
     this.representation = representation;
     this.position = position;
-    this.dimension = dimension;
-    this.elements = elements;
+    this.game = game;
   }
 
-  public Element(String representation, Position position, List<Element> elements,
-      Dimension dimension, InputListener inputListener) {
-    this.representation = representation;
-    this.position = position;
-    this.dimension = dimension;
-    this.elements = elements;
-    this.registerForHandleInput(inputListener);
-  }
-
-  public String getRepresentation() {
+  public String representation() {
     return representation;
   }
 
-  public Position getPosition() {
+  public Position position() {
     return position;
+  }
+
+  protected InputListener inputListener() {
+    return game.inputListener();
+  }
+
+  protected List<Element> elements() {
+    return game.elements();
+  }
+
+  protected Dimension dimension() {
+    return game.dimension();
+  }
+
+  protected Game game() {
+    return game;
   }
 
   public abstract void start();
@@ -44,42 +49,43 @@ public abstract class Element {
   public void handleInput(String key) {
   }
 
-  private void registerForHandleInput(InputListener inputListener) {
+  protected void registerForHandleInput(InputListener inputListener) {
     inputListener.registerElement(this);
   }
 
   protected boolean hasRepresentationUp(String representation) {
     Position downPosition = new Position(position.getWidth(), position.getHeight() - 1);
-    return elements.stream()
+    return game.elements().stream()
         .anyMatch(element -> element.position.equals(downPosition) && element.representation.equals(
             representation));
   }
 
   protected boolean hasRepresentationDown(String representation) {
     Position downPosition = new Position(position.getWidth(), position.getHeight() + 1);
-    return elements.stream()
+    return game.elements().stream()
         .anyMatch(element -> element.position.equals(downPosition) && element.representation.equals(
             representation));
   }
 
   protected boolean hasRepresentationRight(String representation) {
     Position downPosition = new Position(position.getWidth() + 1, position.getHeight());
-    return elements.stream()
+    return game.elements().stream()
         .anyMatch(element -> element.position.equals(downPosition) && element.representation.equals(
             representation));
   }
 
   protected boolean hasRepresentationLeft(String representation) {
     Position downPosition = new Position(position.getWidth() - 1, position.getHeight());
-    return elements.stream()
+    return game.elements().stream()
         .anyMatch(element -> element.position.equals(downPosition) && element.representation.equals(
             representation));
   }
 
   protected void remove() {
-    elements.removeIf(
+    game.elements().removeIf(
         element -> element.position.equals(this.position) && element.representation.equals(
             this.representation));
   }
+
 
 }

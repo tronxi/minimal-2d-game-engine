@@ -19,7 +19,7 @@ public abstract class Screen {
 
   public Optional<Element> findElementByPosition(Position position) {
     return elements.stream()
-        .filter(element -> element.getPosition().equals(position)).findFirst();
+        .filter(element -> element.position().equals(position)).findFirst();
   }
 
 }
