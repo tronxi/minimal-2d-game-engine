@@ -3,14 +3,17 @@ package dev.tronxi;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import dev.tronxi.engine.Game;
+import dev.tronxi.engine.PropertiesReader;
 import dev.tronxi.engine.listeners.GlobalKeyListener;
 import dev.tronxi.engine.listeners.InputListener;
+import java.util.Properties;
 
 public class Main {
 
   public Main() {
+    Properties properties = new PropertiesReader().read("engine.properties");
     InputListener inputListener = new InputListener();
-    Game game = new Game(inputListener);
+    Game game = new Game(properties, inputListener);
     setKeyListeners(inputListener);
     game.start();
   }

@@ -1,14 +1,12 @@
 package dev.tronxi.engine;
 
 public class Dimension {
-  private final int width;
-  private final int height;
+  private int width;
+  private int height;
   private int widthVisibleSize;
   private int widthVisibleCenter;
 
-  public Dimension(int width, int height, int widthVisibleSize, int widthVisibleCenter) {
-    this.width = width;
-    this.height = height;
+  public Dimension(int widthVisibleSize, int widthVisibleCenter) {
     this.widthVisibleSize = widthVisibleSize;
     this.widthVisibleCenter = widthVisibleCenter;
   }
@@ -40,5 +38,13 @@ public class Dimension {
   public boolean isInDimension(Position position){
     return position.getWidth() >= 0 && position.getWidth() < width
         && position.getHeight() >= 0 && position.getHeight() < height;
+  }
+
+  public void setWidth(int width) {
+    this.width = width;
+  }
+
+  public void setHeight(int height) {
+    this.height = height;
   }
 }
