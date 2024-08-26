@@ -1,10 +1,7 @@
 package dev.tronxi.engine.elements;
 
-import dev.tronxi.engine.Dimension;
 import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
-import dev.tronxi.engine.listeners.InputListener;
-import java.util.List;
 
 public class MainElement extends Element {
   private boolean mustDown = true;

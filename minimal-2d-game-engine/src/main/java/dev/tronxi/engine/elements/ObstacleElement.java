@@ -1,9 +1,7 @@
 package dev.tronxi.engine.elements;
 
-import dev.tronxi.engine.Dimension;
 import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
-import java.util.List;
 
 public class ObstacleElement extends Element {
 
