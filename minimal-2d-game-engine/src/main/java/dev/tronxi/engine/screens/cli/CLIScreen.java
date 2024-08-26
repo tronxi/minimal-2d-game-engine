@@ -32,7 +32,7 @@ public class CLIScreen extends Screen {
 //    for (Element element : elements) {
 //      System.out.println(element.getRepresentation() + ", " + element.getPosition());
 //    }
-    CLIUtils.sleep(24);
+    CLIUtils.sleep(10);
   }
 
 }

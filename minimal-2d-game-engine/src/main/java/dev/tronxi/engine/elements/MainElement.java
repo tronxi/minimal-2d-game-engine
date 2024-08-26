@@ -4,7 +4,8 @@ import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
 
 public class MainElement extends Element {
-  private boolean mustDown = true;
+
+  private int mustDown = 0;
 
   public MainElement(String representation, Position position, Game game) {
     super(representation, position, game);
@@ -17,12 +18,16 @@ public class MainElement extends Element {
 
   @Override
   public void update() {
-    if(mustDown) {
+    if (mustDown % 10 == 0) {
+      mustDown = 0;
       if (!hasRepresentationDown("#")) {
         position().down();
+        if (position().getHeight() == dimension().height()) {
+          game().initElements();
+        }
       }
     }
-    mustDown = !mustDown;
+    mustDown++;
   }
 
   @Override
@@ -52,7 +57,8 @@ public class MainElement extends Element {
         }
       }
       case "Q" -> {
-        elements().add(new ShotElement(">", new Position(position().getWidth(), position().getHeight()), game()));
+        elements().add(
+            new ShotElement(">", new Position(position().getWidth(), position().getHeight()), game()));
       }
     }
     dimension().setWidthVisibleCenter(position().getWidth());

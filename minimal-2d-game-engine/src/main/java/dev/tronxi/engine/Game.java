@@ -12,16 +12,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Game {
 
   private final Dimension dimension;
-  private final List<Element> elements;
   private final Screen screen;
   private final InputListener inputListener;
+  private final List<Element> elements;
 
   public Game(InputListener inputListener) {
     this.inputListener = inputListener;
     dimension = new Dimension(200, 20, 80, 40);
     this.elements = new CopyOnWriteArrayList<>();
     this.screen = new CLIScreen(dimension, elements);
+  }
 
+  public void initElements() {
+    elements.clear();
     Element mainElement = new MainElement("\u001B[36m" + "^" + "\u001B[0m", new Position(0, 0), this);
 
     this.elements.add(mainElement);
@@ -61,12 +64,13 @@ public class Game {
     this.elements.add(new ObstacleElement("#", new Position(30, 19), this));
     this.elements.add(new ObstacleElement("#", new Position(31, 19), this));
     this.elements.add(new ObstacleElement("#", new Position(32, 19), this));
-  }
-
-  public void start() {
     for (Element element : elements) {
       element.start();
     }
+  }
+
+  public void start() {
+    initElements();
     do {
       screen.print();
       for (Element element : elements) {
