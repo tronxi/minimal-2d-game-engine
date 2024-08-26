@@ -20,7 +20,7 @@ public class Game {
     this.elements = new CopyOnWriteArrayList<>();
     this.screen = new CLIScreen(dimension, elements);
 
-    Element mainElement = new MainElement("^", new Position(0, 0), elements, dimension, inputListener);
+    Element mainElement = new MainElement("\u001B[36m" + "^" + "\u001B[0m", new Position(0, 0), elements, dimension, inputListener);
 
     this.elements.add(mainElement);
     this.elements.add(new ObstacleElement("#", new Position(0, 15), elements, dimension));
