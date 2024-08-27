@@ -1,4 +1,4 @@
-package dev.tronxi.engine;
+package dev.tronxi.engine.common;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -13,6 +13,7 @@ public class PropertiesReader {
     } catch (IOException e) {
       System.err.println("Error reading properties file");
       System.err.println(e.getMessage());
+      EngineUtils.exitEngine();
     }
     return properties;
   }

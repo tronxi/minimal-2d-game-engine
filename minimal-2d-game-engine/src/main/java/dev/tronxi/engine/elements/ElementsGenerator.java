@@ -1,8 +1,10 @@
-package dev.tronxi.engine;
+package dev.tronxi.engine.elements;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.tronxi.engine.elements.Element;
+import dev.tronxi.engine.Game;
+import dev.tronxi.engine.Position;
+import dev.tronxi.engine.common.EngineUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -46,9 +48,11 @@ public class ElementsGenerator {
         }
       } catch (IOException e) {
         System.err.println(e.getMessage());
+        EngineUtils.exitEngine();
       }
     } else {
       System.err.println("File not found: " + fileLevel);
+      EngineUtils.exitEngine();
     }
     return elements;
   }
@@ -62,14 +66,18 @@ public class ElementsGenerator {
       Object[] initArgs = {representation, position, game};
       return (Element) constructor.newInstance(initArgs);
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      System.err.println(e.getMessage());
+      EngineUtils.exitEngine();
+      return null;
     }
   }
 
   private Map<String, String> parseElementsDefinition(String elementsDefinition) {
     ObjectMapper objectMapper = new ObjectMapper();
     try {
-      List<Map<String, String>> elements = objectMapper.readValue(elementsDefinition, new TypeReference<>() {});
+      List<Map<String, String>> elements = objectMapper.readValue(elementsDefinition,
+          new TypeReference<>() {
+          });
 
       Map<String, String> representationMap = new HashMap<>();
       for (Map<String, String> element : elements) {
@@ -79,7 +87,9 @@ public class ElementsGenerator {
       }
       return representationMap;
     } catch (Exception e) {
-      throw new RuntimeException(e);
+      System.err.println(e.getMessage());
+      EngineUtils.exitEngine();
+      return null;
     }
   }
 

@@ -1,6 +1,7 @@
 package dev.tronxi.engine;
 
 import dev.tronxi.engine.elements.Element;
+import dev.tronxi.engine.elements.ElementsGenerator;
 import dev.tronxi.engine.listeners.InputListener;
 import dev.tronxi.engine.screens.Screen;
 import dev.tronxi.engine.screens.cli.CLIScreen;

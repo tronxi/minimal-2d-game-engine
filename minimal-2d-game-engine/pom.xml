@@ -44,12 +44,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <files>
-            <file>src/main/resources/engine.properties</file>
-          </files>
-          <properties/>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
