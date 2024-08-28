@@ -2,12 +2,14 @@ package dev.tronxi.minimal2dgameengineapi.engine.api.rest.controller;
 
 import dev.tronxi.minimal2dgameengineapi.engine.model.Project;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.CreateProjectUseCase;
+import dev.tronxi.minimal2dgameengineapi.engine.usecases.BuildJarUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.RetrieveProjectsUseCase;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,11 +19,13 @@ public class ProjectController {
 
   private final CreateProjectUseCase createProjectUseCase;
   private final RetrieveProjectsUseCase retrieveProjectsUseCase;
+  private final BuildJarUseCase buildJarUseCase;
 
   public ProjectController(CreateProjectUseCase createProjectUseCase,
-      RetrieveProjectsUseCase retrieveProjectsUseCase) {
+      RetrieveProjectsUseCase retrieveProjectsUseCase, BuildJarUseCase buildJarUseCase) {
     this.createProjectUseCase = createProjectUseCase;
     this.retrieveProjectsUseCase = retrieveProjectsUseCase;
+    this.buildJarUseCase = buildJarUseCase;
   }
 
   @PostMapping("/{projectName}")
@@ -34,6 +38,13 @@ public class ProjectController {
   @GetMapping()
   public ResponseEntity<List<Project>> getProjects() {
     return ResponseEntity.ok(retrieveProjectsUseCase.retrieve());
+  }
+
+  @PutMapping("/{projectName}/build")
+  public ResponseEntity<Void> buildProject(@PathVariable String projectName) {
+    Project project = new Project(projectName);
+    buildJarUseCase.build(project);
+    return ResponseEntity.ok().build();
   }
 
 }
