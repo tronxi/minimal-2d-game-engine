@@ -27,11 +27,16 @@ public class BuildJarUseCase {
     try {
       Process process = Runtime.getRuntime().exec(new String[]{"bash", "-c", "mvn clean install"}, null, projectFile);
       BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      StringBuilder errorMessage = new StringBuilder();
       String line;
       while ((line = reader.readLine()) != null) {
         System.out.println(line);
+        errorMessage.append(line);
       }
-      process.waitFor();
+      int status = process.waitFor();
+      if(status != 0) {
+        throw new RuntimeException("Error building jar: " + errorMessage);
+      }
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException("Error building jar: " + e);
     }

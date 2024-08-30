@@ -39,7 +39,7 @@ public class PropertiesManager {
   public void addElementClass(Project project, ElementClass elementClass) {
     createPropertiesFileIfNotExist(project);
     Properties properties = getProperties(project);
-    String elementClassFullName = "dev.tronxi.engine.elements." + elementClass.className();
+    String elementClassFullName = "dev.tronxi.engine.elements.custom." + elementClass.className();
     Map<String, String> elementsDefinition = parseElementsDefinition(properties.getProperty("elementsDefinition"));
     elementsDefinition.put(elementClass.representation(), elementClassFullName);
     properties.setProperty("elementsDefinition", elementsDefinitionToJson(elementsDefinition));
@@ -114,7 +114,6 @@ public class PropertiesManager {
     for (Map.Entry<String, String> entry : elementsDefinition.entrySet()) {
       elements.add(new ElementClass(entry.getKey(), entry.getValue(), ""));
     }
-    System.out.println(elements);
     try {
       return objectMapper.writeValueAsString(elements);
     } catch (JsonProcessingException e) {
