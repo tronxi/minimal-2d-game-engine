@@ -1,11 +1,11 @@
 package dev.tronxi.minimal2dgameengineapi.engine.usecases;
 
 import dev.tronxi.minimal2dgameengineapi.engine.model.Project;
+import dev.tronxi.minimal2dgameengineapi.engine.usecases.services.ProjectFileRetriever;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,14 @@ public class BuildJarUseCase {
   @Value("${engine.workspace}")
   private String workspace;
 
+  private final ProjectFileRetriever projectFileRetriever;
+
+  public BuildJarUseCase(ProjectFileRetriever projectFileRetriever) {
+    this.projectFileRetriever = projectFileRetriever;
+  }
+
   public void build(Project project) {
-    File projectFile = Paths.get(workspace).resolve(project.name()).toFile().getAbsoluteFile();
-    if (!projectFile.exists()) {
-      throw new RuntimeException("Project not exist");
-    }
+    File projectFile = projectFileRetriever.retrieveProjectFile(workspace, project);
 
     try {
       Process process = Runtime.getRuntime().exec(new String[]{"bash", "-c", "mvn clean install"}, null, projectFile);

@@ -14,11 +14,13 @@ public class RetrieveProjectsUseCase {
   private String workspace;
 
   public List<Project> retrieve() {
-    List<Project> projects = new ArrayList<>();
     File workspaceFile = new File(this.workspace);
-    if(!workspaceFile.exists() || !workspaceFile.isDirectory()) {
-      throw new RuntimeException("Workspace does not exist or is not a directory");
-    }
+    checkIfWorkspaceExist(workspaceFile);
+    return retrieveProjectsInWorkspace(workspaceFile);
+  }
+
+  private List<Project> retrieveProjectsInWorkspace(File workspaceFile) {
+    List<Project> projects = new ArrayList<>();
     File[] files = workspaceFile.listFiles();
 
     if (files != null) {
@@ -30,6 +32,12 @@ public class RetrieveProjectsUseCase {
     }
 
     return projects;
+  }
+
+  private void checkIfWorkspaceExist(File workspaceFile) {
+    if (!workspaceFile.exists() || !workspaceFile.isDirectory()) {
+      throw new RuntimeException("Workspace does not exist or is not a directory");
+    }
   }
 
 }
