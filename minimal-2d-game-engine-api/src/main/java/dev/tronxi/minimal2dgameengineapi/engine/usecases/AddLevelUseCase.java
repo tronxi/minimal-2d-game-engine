@@ -3,6 +3,7 @@ package dev.tronxi.minimal2dgameengineapi.engine.usecases;
 import dev.tronxi.minimal2dgameengineapi.engine.model.Level;
 import dev.tronxi.minimal2dgameengineapi.engine.model.Project;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.services.ProjectFileRetriever;
+import dev.tronxi.minimal2dgameengineapi.engine.usecases.services.PropertiesManager;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -14,11 +15,14 @@ import org.springframework.stereotype.Service;
 public class AddLevelUseCase {
 
   private final ProjectFileRetriever projectFileRetriever;
+  private final PropertiesManager propertiesManager;
   @Value("${engine.workspace}")
   private String workspace;
 
-  public AddLevelUseCase(ProjectFileRetriever projectFileRetriever) {
+  public AddLevelUseCase(ProjectFileRetriever projectFileRetriever,
+      PropertiesManager propertiesManager) {
     this.projectFileRetriever = projectFileRetriever;
+    this.propertiesManager = propertiesManager;
   }
 
   public void add(Project project, Level level) {
@@ -28,6 +32,7 @@ public class AddLevelUseCase {
     createLevelsPath(levelsPath);
     createLevelFile(levelsPath, level);
     writeLevelContent(levelsPath, level);
+    propertiesManager.setLevelName(project, levelsPath, level);
 
   }
 
