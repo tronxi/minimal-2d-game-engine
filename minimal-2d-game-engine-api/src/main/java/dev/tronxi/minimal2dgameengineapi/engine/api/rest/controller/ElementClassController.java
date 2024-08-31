@@ -4,6 +4,7 @@ import dev.tronxi.minimal2dgameengineapi.engine.model.ElementClass;
 import dev.tronxi.minimal2dgameengineapi.engine.model.Project;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.AddElementClassUseCase;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("project/")
+@CrossOrigin(origins = "*")
+@RequestMapping("project")
 public class ElementClassController {
 
   private final AddElementClassUseCase addElementClassUseCase;
