@@ -1,0 +1,11 @@
+<div class="workspace">
+  <span *ngFor="let project of projects">
+      <app-workspace-project [project]="project"></app-workspace-project>
+  </span>
+  <div class="add-project-button">
+    <a (click)="onClickCreateProject()" mat-fab extended class="button-color">
+      <mat-icon>add</mat-icon>
+      Create Project
+    </a>
+  </div>
+</div>

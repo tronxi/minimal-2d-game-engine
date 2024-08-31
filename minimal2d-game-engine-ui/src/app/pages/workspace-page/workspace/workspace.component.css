@@ -1,0 +1,16 @@
+.workspace {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.add-project-button {
+  text-align: center;
+}
+
+.button-color {
+  background: rgb(33, 155, 58);
+  color: white;
+}
