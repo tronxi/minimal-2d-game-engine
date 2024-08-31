@@ -1,5 +1,6 @@
 package dev.tronxi.minimal2dgameengineapi.engine.usecases.services;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +25,8 @@ public class PropertiesManager {
   private final ProjectFileRetriever projectFileRetriever;
   @Value("${engine.workspace}")
   private String workspace;
+  @Value("${engine.custom-elements-package-name}")
+  private String customElementsPackageName;
 
   public PropertiesManager(ProjectFileRetriever projectFileRetriever) {
     this.projectFileRetriever = projectFileRetriever;
@@ -39,11 +42,17 @@ public class PropertiesManager {
   public void addElementClass(Project project, ElementClass elementClass) {
     createPropertiesFileIfNotExist(project);
     Properties properties = getProperties(project);
-    String elementClassFullName = "dev.tronxi.engine.elements.custom." + elementClass.className();
-    Map<String, String> elementsDefinition = parseElementsDefinition(properties.getProperty("elementsDefinition"));
+    String elementClassFullName = customElementsPackageName + elementClass.className();
+    Map<String, String> elementsDefinition = parseElementsDefinition(
+        properties.getProperty("elementsDefinition"));
     elementsDefinition.put(elementClass.representation(), elementClassFullName);
     properties.setProperty("elementsDefinition", elementsDefinitionToJson(elementsDefinition));
     saveProperties(project, properties);
+  }
+
+  public Map<String, String> retrieveElementsDefinition(Project project) {
+    Properties properties = getProperties(project);
+    return parseElementsDefinition(properties.getProperty("elementsDefinition"));
   }
 
   private void createPropertiesFileIfNotExist(Project project) {
@@ -110,16 +119,16 @@ public class PropertiesManager {
 
   private String elementsDefinitionToJson(Map<String, String> elementsDefinition) {
     ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.setSerializationInclusion(Include.NON_NULL);
     List<ElementClass> elements = new ArrayList<>();
     for (Map.Entry<String, String> entry : elementsDefinition.entrySet()) {
-      elements.add(new ElementClass(entry.getKey(), entry.getValue(), ""));
+      elements.add(new ElementClass(entry.getKey(), entry.getValue(), null));
     }
     try {
       return objectMapper.writeValueAsString(elements);
     } catch (JsonProcessingException e) {
       throw new RuntimeException("Error parsing to json: " + e);
     }
-
   }
 
 }

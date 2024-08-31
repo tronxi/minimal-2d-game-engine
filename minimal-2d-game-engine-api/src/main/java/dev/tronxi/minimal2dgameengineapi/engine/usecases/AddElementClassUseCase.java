@@ -27,7 +27,7 @@ public class AddElementClassUseCase extends AddResourceUseCase {
 
     createResourcesPath(elementClassesPath);
     createResourceFile(elementClassesPath, elementClass.className());
-    writeResourceContent(elementClassesPath, elementClass.className(), elementClass.representation());
+    writeResourceContent(elementClassesPath, elementClass.className(), elementClass.content());
     propertiesManager.addElementClass(project, elementClass);
   }
 
