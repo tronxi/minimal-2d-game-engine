@@ -1,0 +1,16 @@
+services:
+  minimal-2d-game-engine-api:
+    container_name: minimal-2d-game-engine-api
+    image: minimal-2d-game-engine-api:latest
+    build:
+      context: minimal-2d-game-engine-api
+    ports:
+      - "8080:8080"
+    volumes: 
+      - ./minimal-2d-game-engine/:/minimal-2d-game-engine/
+      - ./workspace/:/workspace/
+    networks: 
+      - minimal-2d-game-engine-net
+
+networks: 
+    minimal-2d-game-engine-net:

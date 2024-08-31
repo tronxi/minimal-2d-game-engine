@@ -6,11 +6,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BuildJarUseCase {
+
+  Logger logger = LoggerFactory.getLogger(BuildJarUseCase.class);
+
 
   @Value("${engine.workspace}")
   private String workspace;
@@ -30,7 +35,7 @@ public class BuildJarUseCase {
       StringBuilder errorMessage = new StringBuilder();
       String line;
       while ((line = reader.readLine()) != null) {
-        System.out.println(line);
+        logger.info(line);
         errorMessage.append(line);
       }
       int status = process.waitFor();

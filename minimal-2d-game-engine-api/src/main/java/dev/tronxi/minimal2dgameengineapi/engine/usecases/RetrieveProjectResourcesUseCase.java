@@ -44,10 +44,10 @@ public class RetrieveProjectResourcesUseCase {
 
   private List<Level> retrieveLevels(File projectFile) {
     File levelsFile = projectFile.toPath().resolve(levelsDirectory).toFile();
-    if (!levelsFile.exists()) {
-      throw new RuntimeException("Levels directory does not exist");
-    }
     List<Level> levels = new ArrayList<>();
+    if (!levelsFile.exists()) {
+      return levels;
+    }
     File[] files = levelsFile.listFiles();
 
     if (files != null) {
@@ -62,10 +62,10 @@ public class RetrieveProjectResourcesUseCase {
 
   private List<ElementClass> retrieveElementClasses(Project project, File projectFile) {
     File customElementsPackageFile = projectFile.toPath().resolve(customElementsPackage).toFile();
-    if (!customElementsPackageFile.exists()) {
-      throw new RuntimeException("CustomElementsPackage directory does not exist");
-    }
     List<ElementClass> elementClasses = new ArrayList<>();
+    if (!customElementsPackageFile.exists()) {
+      return elementClasses;
+    }
     File[] files = customElementsPackageFile.listFiles();
 
     if (files != null) {
