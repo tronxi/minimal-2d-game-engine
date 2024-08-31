@@ -1,0 +1,23 @@
+.workspace-project-card {
+  width: 400px;
+  margin: 0 auto;
+}
+
+mat-card {
+  background: rgb(57, 71, 82);
+  color: white;
+  border: 1px solid grey;
+  font-size: 12px;
+}
+
+mat-card:hover {
+  cursor: pointer;
+}
+
+mat-card-title {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
