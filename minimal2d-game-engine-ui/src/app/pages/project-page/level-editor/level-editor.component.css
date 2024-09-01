@@ -4,7 +4,9 @@
 }
 
 .level-name {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   font-size: 14px;
 }
@@ -17,4 +19,14 @@
 .level-editor {
   margin-top: 10px;
   width: 95%;
+}
+
+.save-level-container {
+  margin: 10px;
+}
+
+.save-level-button {
+  background: rgb(33, 155, 58);
+  color: white;
+  height: 30px;
 }
