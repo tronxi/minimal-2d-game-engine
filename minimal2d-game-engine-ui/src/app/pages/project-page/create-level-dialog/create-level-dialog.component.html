@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Add Level</h2>
+<mat-dialog-content>
+  <p>Level Name</p>
+  <mat-form-field>
+    <mat-label>Level Name</mat-label>
+    <input matInput [(ngModel)]="levelName" (keydown.enter)="onEnter()"/>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onEnter()" mat-button cdkFocusInitial>Add</button>
+</mat-dialog-actions>

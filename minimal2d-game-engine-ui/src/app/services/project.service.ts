@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Project} from "../models/project";
 import {ProjectResources} from "../models/projectResources";
+import {Level} from "../models/level";
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class ProjectService {
 
   buildProject(project: Project): Observable<any> {
     return this.http.put(environment.url + "/project/" + project.name + "/build", {});
+  }
+
+  addLevel(project: Project, level: Level): Observable<any> {
+    return this.http.post(environment.url + "/project/" + project.name + "/level", level);
   }
 
 
