@@ -3,6 +3,7 @@ import {Project} from "../../../models/project";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {TitleCasePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-workspace-project',
@@ -14,8 +15,11 @@ import {TitleCasePipe} from "@angular/common";
 export class WorkspaceProjectComponent {
   @Input() project!: Project;
 
+  constructor(private router: Router) {
+  }
+
   onClickProject(): void {
-    console.log(this.project);
+    this.router.navigate(['/project'], {state: {project: this.project}});
   }
 
 }

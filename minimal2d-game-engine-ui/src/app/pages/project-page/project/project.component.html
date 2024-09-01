@@ -1,0 +1,10 @@
+<div *ngIf="project" class="project-sidebar">
+  <div *ngIf="projectResources">
+    <app-sidebar [projectResources]="projectResources"></app-sidebar>
+  </div>
+  <div class="project-container">
+    <div class="project-title">
+      {{ project.name | titlecase }}
+    </div>
+  </div>
+</div>
