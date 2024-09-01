@@ -1,13 +1,26 @@
 <div class="sidebar">
   <mat-tab-group>
     <mat-tab label="Levels">
+      <div class="add-button-container">
+        <a (click)="onClickAddLevel()" mat-fab extended class="add-button">
+          <mat-icon>add</mat-icon>
+          Add Level
+        </a>
+      </div>
       <div (click)="onClickLevel(level)" class="name" *ngFor="let level of projectResources.levels">
         {{ level.name }}
       </div>
     </mat-tab>
     <mat-tab label="Elements">
-      <div (click)="onClickElementClass(elementClass)" class="name" *ngFor="let elementClass of projectResources.elementClasses">
-       {{elementClass.representation}} - {{ elementClass.className }}
+      <div class="add-button-container">
+        <a (click)="onClickAddElement()" mat-fab extended class="add-button">
+          <mat-icon>add</mat-icon>
+          Add Element
+        </a>
+      </div>
+      <div (click)="onClickElementClass(elementClass)" class="name"
+           *ngFor="let elementClass of projectResources.elementClasses">
+        {{ elementClass.representation }} - {{ elementClass.className }}
       </div>
     </mat-tab>
   </mat-tab-group>

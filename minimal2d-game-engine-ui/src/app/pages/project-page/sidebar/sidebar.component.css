@@ -6,6 +6,20 @@
 
 .name {
   margin: 10px;
-  color: grey;
+  color: rgb(165, 181, 197);
   cursor: pointer;
+}
+
+.name:hover {
+  color: rgb(101, 108, 121);
+}
+
+.add-button-container {
+  margin: 10px;
+}
+
+.add-button {
+  background: rgb(33, 155, 58);
+  color: white;
+  height: 30px;
 }
