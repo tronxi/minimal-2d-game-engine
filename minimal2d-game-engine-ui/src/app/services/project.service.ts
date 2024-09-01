@@ -5,6 +5,7 @@ import {environment} from "../../environments/environment";
 import {Project} from "../models/project";
 import {ProjectResources} from "../models/projectResources";
 import {Level} from "../models/level";
+import {ElementClass} from "../models/elementclass";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class ProjectService {
 
   addLevel(project: Project, level: Level): Observable<any> {
     return this.http.post(environment.url + "/project/" + project.name + "/level", level);
+  }
+
+  addElementClass(project: Project, elementClass: ElementClass): Observable<any> {
+    return this.http.post(environment.url + "/project/" + project.name + "/elementClass", elementClass);
   }
 
 

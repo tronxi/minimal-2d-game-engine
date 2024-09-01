@@ -20,7 +20,7 @@
                         [level]="selectedEvent.level!" [project]="project">
       </app-level-editor>
       <app-element-class-editor *ngIf="selectedEvent.type === ResourcesTypes.ElementClass"
-                                [elementClass]="selectedEvent.elementClass!">
+                                [elementClass]="selectedEvent.elementClass!" [project]="project">
       </app-element-class-editor>
     </div>
   </div>

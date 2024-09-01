@@ -1,6 +1,12 @@
 <div class="class-editor-container" *ngIf="elementClass">
   <div class="class-name">
     {{ elementClass.representation }} - {{ elementClass.className }}
+    <div class="save-element-container">
+      <a (click)="onClickSaveElement()" mat-fab extended class="save-element-button">
+        <mat-icon>save</mat-icon>
+        Save
+      </a>
+    </div>
   </div>
   <div class="class-editor-flex">
     <textarea class="class-editor" rows="40" [(ngModel)]="elementClass.content"></textarea>

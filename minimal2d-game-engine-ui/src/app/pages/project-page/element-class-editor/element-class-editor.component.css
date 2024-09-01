@@ -4,8 +4,9 @@
 }
 
 .class-name {
-  text-align: center;
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;  color: white;
   font-size: 14px;
 }
 
@@ -17,4 +18,14 @@
 .class-editor {
   margin-top: 10px;
   width: 95%;
+}
+
+.save-element-container {
+  margin: 10px;
+}
+
+.save-element-button {
+  background: rgb(33, 155, 58);
+  color: white;
+  height: 30px;
 }

@@ -11,6 +11,9 @@ import {MatIcon} from "@angular/material/icon";
 import {MatDialog} from "@angular/material/dialog";
 import {CreateLevelDialogComponent} from "../create-level-dialog/create-level-dialog.component";
 import {ProjectService} from "../../../services/project.service";
+import {
+  CreateElementClassDialogComponent
+} from "../create-element-class-dialog/create-element-class-dialog.component";
 
 @Component({
   selector: 'app-sidebar',
@@ -55,6 +58,16 @@ export class SidebarComponent implements OnChanges {
   }
 
   onClickAddElement() {
-    console.log("add element")
+    const dialogRef = this.dialog.open(CreateElementClassDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe(elementClass => {
+      if (elementClass !== undefined) {
+        this.projectService.addElementClass(this.projectResources.project, elementClass).subscribe(_ => {
+          this.projectService.retrieveProjectResources(this.projectResources.project).subscribe(value => {
+            this.projectResources = value;
+          })
+        });
+      }
+    });
   }
 }
