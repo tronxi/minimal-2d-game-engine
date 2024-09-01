@@ -8,8 +8,25 @@
   margin-top: 10px;
 }
 
+.build-project-button{
+  text-align: center;
+  margin-top: 10px;
+}
+
 .project-container {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+.button-color {
+  background: rgb(33, 155, 58);
+  color: white;
+  height: 30px;
+}
+
+.building-color {
+  background: rgb(106, 117, 107);
+  color: white;
+  height: 30px;
 }

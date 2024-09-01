@@ -25,5 +25,9 @@ export class ProjectService {
     return this.http.get<ProjectResources>(environment.url + "/project/" + project.name)
   }
 
+  buildProject(project: Project): Observable<any> {
+    return this.http.put(environment.url + "/project/" + project.name + "/build", {});
+  }
+
 
 }

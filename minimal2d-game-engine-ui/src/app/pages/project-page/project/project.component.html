@@ -6,6 +6,17 @@
     <div class="project-title">
       {{ project.name | titlecase }}
     </div>
+    <div class="build-project-button">
+      <a (click)="onClickBuildProject()" mat-fab extended
+         [ngClass]="{'button-color': !building,'building-color': building}">
+        <span *ngIf="!building">
+          Build Project
+        </span>
+        <span *ngIf="building">
+          Building...
+        </span>
+      </a>
+    </div>
     <div *ngIf="selectedEvent">
       <app-level-editor *ngIf="selectedEvent.type === ResourcesTypes.Level"
                         [level]="selectedEvent.level!">
