@@ -3,13 +3,11 @@
 }
 
 .project-title {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   color: white;
-  margin-top: 10px;
-}
-
-.build-project-button{
-  text-align: center;
   margin-top: 10px;
 }
 
