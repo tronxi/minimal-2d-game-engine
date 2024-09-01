@@ -1,0 +1,20 @@
+.level-editor-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.level-name {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+}
+
+.level-editor-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.level-editor {
+  margin-top: 10px;
+  width: 95%;
+}

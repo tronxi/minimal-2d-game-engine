@@ -4,6 +4,8 @@ import {ProjectResources} from "../../../models/projectResources";
 import {NgForOf} from "@angular/common";
 import {Level} from "../../../models/level";
 import {ElementClass} from "../../../models/elementclass";
+import {ProjectStateService} from "../../../state/project-state.service";
+import {SelectedEvent} from "../../../state/SelectedEvent";
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +17,7 @@ import {ElementClass} from "../../../models/elementclass";
 export class SidebarComponent implements OnChanges {
   @Input() projectResources!: ProjectResources;
 
-  constructor() {
+  constructor(private projectStateService: ProjectStateService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -23,11 +25,11 @@ export class SidebarComponent implements OnChanges {
   }
 
   onClickLevel(level: Level) {
-    console.log(level);
+    this.projectStateService.update(SelectedEvent.fromLevel(level));
   }
 
   onClickElementClass(elementClass: ElementClass) {
-    console.log(elementClass);
+    this.projectStateService.update(SelectedEvent.fromElementClass(elementClass));
   }
 
 }

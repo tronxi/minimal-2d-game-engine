@@ -1,0 +1,20 @@
+.class-editor-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.class-name {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+}
+
+.class-editor-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.class-editor {
+  margin-top: 10px;
+  width: 95%;
+}

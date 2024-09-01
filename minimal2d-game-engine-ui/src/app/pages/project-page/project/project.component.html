@@ -6,5 +6,13 @@
     <div class="project-title">
       {{ project.name | titlecase }}
     </div>
+    <div *ngIf="selectedEvent">
+      <app-level-editor *ngIf="selectedEvent.type === ResourcesTypes.Level"
+                        [level]="selectedEvent.level!">
+      </app-level-editor>
+      <app-element-class-editor *ngIf="selectedEvent.type === ResourcesTypes.ElementClass"
+                                [elementClass]="selectedEvent.elementClass!">
+      </app-element-class-editor>
+    </div>
   </div>
 </div>

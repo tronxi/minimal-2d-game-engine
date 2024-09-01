@@ -1,0 +1,8 @@
+<div class="class-editor-container" *ngIf="elementClass">
+  <div class="class-name">
+    {{ elementClass.representation }} - {{ elementClass.className }}
+  </div>
+  <div class="class-editor-flex">
+    <textarea class="class-editor" rows="40" [(ngModel)]="elementClass.content"></textarea>
+  </div>
+</div>

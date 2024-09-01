@@ -1,0 +1,8 @@
+<div class="level-editor-container" *ngIf="level">
+  <div class="level-name">
+    {{ level.name }}
+  </div>
+  <div class="level-editor-flex">
+    <textarea class="level-editor" rows="40" [(ngModel)]="level.content"></textarea>
+  </div>
+</div>
