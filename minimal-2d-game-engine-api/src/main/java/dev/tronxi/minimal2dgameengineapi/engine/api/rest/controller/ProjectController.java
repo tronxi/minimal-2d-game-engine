@@ -5,6 +5,7 @@ import dev.tronxi.minimal2dgameengineapi.engine.model.ProjectResources;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.BuildJarUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.CreateProjectUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.DownloadJarUseCase;
+import dev.tronxi.minimal2dgameengineapi.engine.usecases.RemoveProjectUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.RetrieveProjectResourcesUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.RetrieveProjectsUseCase;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,16 +32,18 @@ public class ProjectController {
   private final BuildJarUseCase buildJarUseCase;
   private final RetrieveProjectResourcesUseCase retrieveProjectResourcesUseCase;
   private final DownloadJarUseCase downloadJarUseCase;
+  private final RemoveProjectUseCase removeProjectUseCase;
 
   public ProjectController(CreateProjectUseCase createProjectUseCase,
       RetrieveProjectsUseCase retrieveProjectsUseCase, BuildJarUseCase buildJarUseCase,
       RetrieveProjectResourcesUseCase retrieveProjectResourcesUseCase,
-      DownloadJarUseCase downloadJarUseCase) {
+      DownloadJarUseCase downloadJarUseCase, RemoveProjectUseCase removeProjectUseCase) {
     this.createProjectUseCase = createProjectUseCase;
     this.retrieveProjectsUseCase = retrieveProjectsUseCase;
     this.buildJarUseCase = buildJarUseCase;
     this.retrieveProjectResourcesUseCase = retrieveProjectResourcesUseCase;
     this.downloadJarUseCase = downloadJarUseCase;
+    this.removeProjectUseCase = removeProjectUseCase;
   }
 
   @PostMapping("/{projectName}")
@@ -65,6 +69,13 @@ public class ProjectController {
   public ResponseEntity<ProjectResources> getProjectResources(@PathVariable String projectName) {
     Project project = new Project(projectName);
     return ResponseEntity.ok(retrieveProjectResourcesUseCase.retrieve(project));
+  }
+
+  @DeleteMapping("/{projectName}")
+  public ResponseEntity<Void> removeProject(@PathVariable String projectName) {
+    Project project = new Project(projectName);
+    removeProjectUseCase.remove(project);
+    return ResponseEntity.ok().build();
   }
 
   @GetMapping("/{projectName}/download")

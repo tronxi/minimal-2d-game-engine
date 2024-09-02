@@ -1,9 +1,13 @@
 <div class="workspace-project-card">
   <mat-card (click)="onClickProject()" class="example-card" appearance="outlined">
-    <mat-card-content>
+    <mat-card-content class="content">
       <mat-card-title>
         <mat-icon>folder</mat-icon>
-        {{ project.name }}</mat-card-title>
+        {{ project.name }}
+      </mat-card-title>
+      <div>
+        <mat-icon (click)="onClickDeleteProject($event)" aria-hidden="false" fontIcon="delete" class="delete-button"></mat-icon>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

@@ -21,3 +21,16 @@ mat-card-title {
   gap: 8px;
 }
 
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.delete-button {
+  color: rgb(124, 26, 26);
+}
+
+.delete-button:hover {
+  color: rgb(245, 49, 49);
+}
