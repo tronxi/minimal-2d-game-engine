@@ -9,6 +9,7 @@
     </div>
   </div>
   <div class="class-editor-flex">
-    <textarea class="class-editor" rows="40" [(ngModel)]="elementClass.content"></textarea>
+    <code-editor class="class-editor" theme="dark" [languages]="languages" language="java"
+                 [(ngModel)]="elementClass.content"></code-editor>
   </div>
 </div>

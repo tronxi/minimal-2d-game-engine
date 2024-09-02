@@ -6,7 +6,8 @@
 .class-name {
   display: flex;
   justify-content: center;
-  align-items: center;  color: white;
+  align-items: center;
+  color: white;
   font-size: 14px;
 }
 
@@ -17,8 +18,8 @@
 
 .class-editor {
   margin-top: 10px;
-  width: 95%;
-  white-space: nowrap;
+  width: 80vw;
+  height: 80vh;
 }
 
 .save-element-container {

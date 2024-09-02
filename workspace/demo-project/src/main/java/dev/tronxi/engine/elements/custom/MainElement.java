@@ -25,6 +25,7 @@ public class MainElement extends Element {
         position().down();
         if (position().getHeight() == dimension().height()) {
           game().initElements();
+          dimension().setWidthVisibleCenter(0);
         }
       }
     }

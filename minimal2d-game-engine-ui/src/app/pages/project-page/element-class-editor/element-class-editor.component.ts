@@ -7,15 +7,18 @@ import {MatIcon} from "@angular/material/icon";
 import {Project} from "../../../models/project";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ProjectService} from "../../../services/project.service";
+import {CodeEditor} from "@acrodata/code-editor";
+import {languages} from '@codemirror/language-data';
 
 @Component({
   selector: 'app-element-class-editor',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, FormsModule, MatFabAnchor, MatIcon],
+  imports: [NgIf, ReactiveFormsModule, FormsModule, MatFabAnchor, MatIcon, CodeEditor],
   templateUrl: './element-class-editor.component.html',
   styleUrl: './element-class-editor.component.css'
 })
 export class ElementClassEditorComponent {
+  protected readonly languages = languages;
 
   @Input() elementClass!: ElementClass;
   @Input() project!: Project;
@@ -38,4 +41,5 @@ export class ElementClassEditorComponent {
       }
     });
   }
+
 }

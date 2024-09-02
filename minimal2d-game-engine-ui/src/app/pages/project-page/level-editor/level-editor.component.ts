@@ -9,11 +9,12 @@ import {MatIcon} from "@angular/material/icon";
 import {Project} from "../../../models/project";
 import {ProjectService} from "../../../services/project.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {CodeEditor} from "@acrodata/code-editor";
 
 @Component({
   selector: 'app-level-editor',
   standalone: true,
-  imports: [MatLabel, MatFormField, MatInput, NgIf, FormsModule, MatFabAnchor, MatIcon],
+  imports: [MatLabel, MatFormField, MatInput, NgIf, FormsModule, MatFabAnchor, MatIcon, CodeEditor],
   templateUrl: './level-editor.component.html',
   styleUrl: './level-editor.component.css'
 })
@@ -33,8 +34,7 @@ export class LevelEditorComponent {
         this.snackBar.open("Level saved successfully!", "", {
           duration: 3000
         });
-      },
-      error: _ => {
+      }, error: _ => {
         this.snackBar.open("Error saving level", "", {
           duration: 5000
         });
