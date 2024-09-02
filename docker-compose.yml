@@ -11,6 +11,15 @@ services:
       - ./workspace/:/workspace/
     networks: 
       - minimal-2d-game-engine-net
+  minimal-2d-game-engine-ui:
+    container_name: minimal-2d-game-engine-ui
+    image: minimal-2d-game-engine-ui:latest
+    build:
+      context: minimal2d-game-engine-ui
+    ports:
+      - "80:80"
+    networks: 
+      - minimal-2d-game-engine-net
 
 networks: 
     minimal-2d-game-engine-net:
