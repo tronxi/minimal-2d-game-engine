@@ -43,6 +43,9 @@ public class PropertiesManager {
     createPropertiesFileIfNotExist(project);
     Properties properties = getProperties(project);
     String elementClassFullName = customElementsPackageName + elementClass.className();
+    if (elementClassFullName.endsWith(".java")) {
+      elementClassFullName = elementClassFullName.substring(0, elementClassFullName.length() - ".java".length());
+    }
     Map<String, String> elementsDefinition = parseElementsDefinition(
         properties.getProperty("elementsDefinition"));
     elementsDefinition.put(elementClass.representation(), elementClassFullName);

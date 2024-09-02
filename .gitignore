@@ -1,3 +1,4 @@
 .DS_STORE
 /workspace/
+!/workspace/example-project/
 minimal2d-game-engine-ui.iml
