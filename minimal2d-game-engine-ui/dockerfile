@@ -3,7 +3,7 @@ WORKDIR /front
 COPY . /front
 RUN npm install -y
 RUN npm install -g @angular/cli -y
-RUN ng build --configuration=production
+RUN ng build --configuration=production --base-href=/engine/
 
 FROM nginx:1.17.6-alpine
 RUN rm -r /usr/share/nginx/html/
