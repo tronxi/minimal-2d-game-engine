@@ -4,10 +4,12 @@ import dev.tronxi.minimal2dgameengineapi.engine.model.ElementClass;
 import dev.tronxi.minimal2dgameengineapi.engine.model.Project;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.services.ProjectFileRetriever;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.services.PropertiesManager;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Path;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -42,16 +44,29 @@ public class AddElementClassUseCase extends AddResourceUseCase {
     if (className.endsWith(".java")) {
       classNameWithOutExtension = className.substring(0, className.length() - ".java".length());
     }
-    String defaultElementPath = ClassLoader.getSystemResource("templates/DefaultElement").getFile();
-    File defaultElementFile = new File(defaultElementPath);
-    try {
-      String defaultElementTemplate = FileUtils.readFileToString(defaultElementFile, "UTF-8");
-      String defaultElementContent = defaultElementTemplate.replace("${defaultName}",
-          classNameWithOutExtension);
-      writeResourceContent(elementClassesPath, className, defaultElementContent);
-    } catch (IOException e) {
-      throw new RuntimeException("Unable to read defaultElement template" + e);
+
+    InputStream inputStream = getClass().getClassLoader()
+        .getResourceAsStream("templates/DefaultElement");
+    if (inputStream == null) {
+      throw new IllegalStateException("Resource not found");
     }
+    String defaultElementContent = readTemplate(inputStream, classNameWithOutExtension);
+    writeResourceContent(elementClassesPath, className, defaultElementContent);
+  }
+
+  private String readTemplate(InputStream inputStream, String classNameWithOutExtension) {
+    StringBuilder defaultElementTemplate = new StringBuilder();
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+      String line;
+      while ((line = reader.readLine()) != null) {
+        defaultElementTemplate.append(line);
+        defaultElementTemplate.append("\n");
+      }
+    } catch (IOException e) {
+      throw new RuntimeException("Failed to read template file: ", e);
+    }
+
+    return defaultElementTemplate.toString().replace("${defaultName}", classNameWithOutExtension);
   }
 
 }
