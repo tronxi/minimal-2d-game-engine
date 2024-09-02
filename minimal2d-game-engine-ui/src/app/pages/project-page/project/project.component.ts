@@ -69,4 +69,8 @@ export class ProjectComponent implements OnDestroy {
       }
     });
   }
+
+  onClickDownloadJar() {
+    this.projectService.downloadJar(this.project);
+  }
 }

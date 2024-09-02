@@ -14,6 +14,10 @@
           Building...
         </span>
       </a>
+      <a (click)="onClickDownloadJar()" mat-fab extended
+         class="button-color">
+        Download .jar
+      </a>
     </div>
     <div *ngIf="selectedEvent">
       <app-level-editor *ngIf="selectedEvent.type === ResourcesTypes.Level"

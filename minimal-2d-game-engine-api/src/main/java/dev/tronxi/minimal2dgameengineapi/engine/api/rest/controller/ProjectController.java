@@ -4,9 +4,13 @@ import dev.tronxi.minimal2dgameengineapi.engine.model.Project;
 import dev.tronxi.minimal2dgameengineapi.engine.model.ProjectResources;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.BuildJarUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.CreateProjectUseCase;
+import dev.tronxi.minimal2dgameengineapi.engine.usecases.DownloadJarUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.RetrieveProjectResourcesUseCase;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.RetrieveProjectsUseCase;
 import java.util.List;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +29,17 @@ public class ProjectController {
   private final RetrieveProjectsUseCase retrieveProjectsUseCase;
   private final BuildJarUseCase buildJarUseCase;
   private final RetrieveProjectResourcesUseCase retrieveProjectResourcesUseCase;
+  private final DownloadJarUseCase downloadJarUseCase;
 
   public ProjectController(CreateProjectUseCase createProjectUseCase,
       RetrieveProjectsUseCase retrieveProjectsUseCase, BuildJarUseCase buildJarUseCase,
-      RetrieveProjectResourcesUseCase retrieveProjectResourcesUseCase) {
+      RetrieveProjectResourcesUseCase retrieveProjectResourcesUseCase,
+      DownloadJarUseCase downloadJarUseCase) {
     this.createProjectUseCase = createProjectUseCase;
     this.retrieveProjectsUseCase = retrieveProjectsUseCase;
     this.buildJarUseCase = buildJarUseCase;
     this.retrieveProjectResourcesUseCase = retrieveProjectResourcesUseCase;
+    this.downloadJarUseCase = downloadJarUseCase;
   }
 
   @PostMapping("/{projectName}")
@@ -59,5 +66,15 @@ public class ProjectController {
     Project project = new Project(projectName);
     return ResponseEntity.ok(retrieveProjectResourcesUseCase.retrieve(project));
   }
+
+  @GetMapping("/{projectName}/download")
+  public ResponseEntity<Resource> downloadProject(@PathVariable String projectName) {
+    Project project = new Project(projectName);
+    Resource resource = downloadJarUseCase.downloadJar(project);
+    return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)
+        .header(HttpHeaders.CONTENT_DISPOSITION,
+            "attachment; filename=\"" + resource.getFilename() + "\"").body(resource);
+  }
+
 
 }

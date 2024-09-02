@@ -39,5 +39,10 @@ export class ProjectService {
     return this.http.post(environment.url + "/project/" + project.name + "/elementClass", elementClass);
   }
 
+  downloadJar(project: Project) {
+    const url = `${environment.url}/project/${project.name}/download`;
+    window.open(url, '_blank');
+  }
+
 
 }

@@ -3,9 +3,11 @@ spring:
     name: minimal-2d-game-engine-api
 
 engine:
+  version: 1.0-SNAPSHOT
   path: /minimal-2d-game-engine/
   workspace: /workspace/
   custom-elements-package: src/main/java/dev/tronxi/engine/elements/custom
   custom-elements-package-name: dev.tronxi.engine.elements.custom.
   levels-directory: levels
+  jar-directory: target
 
