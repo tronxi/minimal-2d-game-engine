@@ -4,7 +4,7 @@
   </div>
   <div class="project-container">
     <div class="project-title">
-      {{ project.name | titlecase }}
+      {{ project.name }}
       <a (click)="onClickBuildProject()" mat-fab extended
          [ngClass]="{'button-color': !building,'building-color': building}">
         <span *ngIf="!building">

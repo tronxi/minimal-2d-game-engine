@@ -1,7 +1,7 @@
 import {Component, inject, OnDestroy} from '@angular/core';
 import {Router} from "@angular/router";
 import {Project} from "../../../models/project";
-import {NgClass, NgIf, TitleCasePipe} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {ProjectService} from "../../../services/project.service";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {ProjectResources} from "../../../models/projectResources";
@@ -17,7 +17,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [NgIf, SidebarComponent, TitleCasePipe, LevelEditorComponent, ElementClassEditorComponent, MatFabAnchor, MatIcon, NgClass],
+  imports: [NgIf, SidebarComponent, LevelEditorComponent, ElementClassEditorComponent, MatFabAnchor, MatIcon, NgClass],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
