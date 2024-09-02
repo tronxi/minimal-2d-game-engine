@@ -5,7 +5,9 @@ import dev.tronxi.minimal2dgameengineapi.engine.model.Project;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.services.ProjectFileRetriever;
 import dev.tronxi.minimal2dgameengineapi.engine.usecases.services.PropertiesManager;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,29 @@ public class AddElementClassUseCase extends AddResourceUseCase {
 
     createResourcesPath(elementClassesPath);
     createResourceFile(elementClassesPath, elementClass.className());
-    writeResourceContent(elementClassesPath, elementClass.className(), elementClass.content());
+    if (elementClass.content().isEmpty()) {
+      writeDefaultClassContent(elementClassesPath, elementClass.className());
+    } else {
+      writeResourceContent(elementClassesPath, elementClass.className(), elementClass.content());
+    }
     propertiesManager.addElementClass(project, elementClass);
+  }
+
+  private void writeDefaultClassContent(Path elementClassesPath, String className) {
+    String classNameWithOutExtension = className;
+    if (className.endsWith(".java")) {
+      classNameWithOutExtension = className.substring(0, className.length() - ".java".length());
+    }
+    String defaultElementPath = ClassLoader.getSystemResource("templates/DefaultElement").getFile();
+    File defaultElementFile = new File(defaultElementPath);
+    try {
+      String defaultElementTemplate = FileUtils.readFileToString(defaultElementFile, "UTF-8");
+      String defaultElementContent = defaultElementTemplate.replace("${defaultName}",
+          classNameWithOutExtension);
+      writeResourceContent(elementClassesPath, className, defaultElementContent);
+    } catch (IOException e) {
+      throw new RuntimeException("Unable to read defaultElement template" + e);
+    }
   }
 
 }
