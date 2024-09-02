@@ -1,7 +1,8 @@
-package dev.tronxi.engine.elements;
+package dev.tronxi.engine.elements.custom;
 
 import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
+import dev.tronxi.engine.elements.Element;
 
 public class ShotElement extends Element {
 
