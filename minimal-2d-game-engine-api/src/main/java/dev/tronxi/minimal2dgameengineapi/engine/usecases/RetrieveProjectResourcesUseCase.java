@@ -83,7 +83,11 @@ public class RetrieveProjectResourcesUseCase {
   private String retrieveRepresentation(Project project, String className) {
     Map<String, String> elementsDefinition = propertiesManager.retrieveElementsDefinition(project);
     for (Map.Entry<String, String> entry : elementsDefinition.entrySet()) {
-      if (entry.getValue().equals(customElementsPackageName + className)) {
+      String elementClassFullName = customElementsPackageName + className;
+      if (elementClassFullName.endsWith(".java")) {
+        elementClassFullName = elementClassFullName.substring(0, elementClassFullName.length() - ".java".length());
+      }
+      if (entry.getValue().equals(elementClassFullName)) {
         return entry.getKey();
       }
     }
