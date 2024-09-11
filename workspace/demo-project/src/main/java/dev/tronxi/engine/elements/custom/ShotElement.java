@@ -22,6 +22,11 @@ public class ShotElement extends Element {
     } else {
       remove();
     }
+  }
+
+  @Override
+  public void handleInput(String key) {
 
   }
+
 }

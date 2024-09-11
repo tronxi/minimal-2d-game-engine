@@ -19,4 +19,10 @@ public class ObstacleElement extends Element {
   public void update() {
 
   }
+
+  @Override
+  public void handleInput(String key) {
+
+  }
+
 }
