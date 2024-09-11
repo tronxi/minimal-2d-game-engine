@@ -27,15 +27,17 @@ public class PropertiesManager {
   private String workspace;
   @Value("${engine.custom-elements-package-name}")
   private String customElementsPackageName;
+  @Value("${engine.properties-path}")
+  private String propertiesPath;
 
   public PropertiesManager(ProjectFileRetriever projectFileRetriever) {
     this.projectFileRetriever = projectFileRetriever;
   }
 
-  public void setLevelName(Project project, Path levelsPath, Level level) {
+  public void setLevelName(Project project, Level level) {
     createPropertiesFileIfNotExist(project);
     Properties properties = getProperties(project);
-    properties.setProperty("fileLevel", level.retrievePath(levelsPath).toString());
+    properties.setProperty("fileLevel", level.name());
     saveProperties(project, properties);
   }
 
@@ -95,7 +97,7 @@ public class PropertiesManager {
 
   private Path getPropertiesFilePath(Project project) {
     return projectFileRetriever.retrieveProjectFile(workspace, project).toPath()
-        .resolve("src/main/resources/engine.properties");
+        .resolve(propertiesPath);
   }
 
   private Map<String, String> parseElementsDefinition(String elementsDefinition) {

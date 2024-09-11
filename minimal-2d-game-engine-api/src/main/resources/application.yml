@@ -8,6 +8,7 @@ engine:
   workspace: /workspace/
   custom-elements-package: src/main/java/dev/tronxi/engine/elements/custom
   custom-elements-package-name: dev.tronxi.engine.elements.custom.
-  levels-directory: levels
+  levels-directory: src/main/resources/levels
+  properties-path: src/main/resources/engine.properties
   jar-directory: target
 

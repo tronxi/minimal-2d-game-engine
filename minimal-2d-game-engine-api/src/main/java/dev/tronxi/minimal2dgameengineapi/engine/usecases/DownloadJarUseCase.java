@@ -30,7 +30,6 @@ public class DownloadJarUseCase {
     String jarName = projectFile.getName() + "-" + engineVersion + ".jar";
     try {
       Path jarPath = projectFile.toPath().resolve(jarDirectory).resolve(jarName);
-      System.out.println(jarPath);
       if(!jarPath.toFile().exists()) {
         throw new RuntimeException("The JAR file does not exist at the expected path");
       }

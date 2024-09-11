@@ -27,7 +27,7 @@ public class AddLevelUseCase extends AddResourceUseCase {
     createResourcesPath(levelsPath);
     createResourceFile(levelsPath, level.name());
     writeResourceContent(levelsPath, level.name(), level.content());
-    propertiesManager.setLevelName(project, levelsPath, level);
+    propertiesManager.setLevelName(project, level);
 
   }
 

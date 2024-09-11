@@ -65,4 +65,5 @@ public class MainElement extends Element {
     }
     dimension().setWidthVisibleCenter(position().getWidth());
   }
+
 }
