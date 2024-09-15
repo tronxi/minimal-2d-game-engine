@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {ProjectService} from "../../../services/project.service";
 import {WorkspaceProjectComponent} from "../workspace-project/workspace-project.component";
 import {Project} from "../../../models/project";
@@ -6,9 +6,9 @@ import {NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatFabAnchor} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
-import {
-  CreateProjectDialogComponent
-} from "../create-project-dialog/create-project-dialog.component";
+import {CreateProjectDialogComponent} from "../create-project-dialog/create-project-dialog.component";
+import {WorkspaceStateService} from "../../../state/workspace-state.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-workspace',
@@ -17,12 +17,15 @@ import {
   templateUrl: './workspace.component.html',
   styleUrl: './workspace.component.css'
 })
-export class WorkspaceComponent implements OnInit {
+export class WorkspaceComponent implements OnInit, OnDestroy {
   readonly dialog = inject(MatDialog);
-
   projects: Project[] = [];
+  private readonly workspaceStateSubscription: Subscription;
 
-  constructor(private projectService: ProjectService) {
+  constructor(private projectService: ProjectService, private workspaceStateService: WorkspaceStateService) {
+    this.workspaceStateSubscription = this.workspaceStateService.state$.subscribe((state) => {
+      this.retrieveProjects();
+    });
   }
 
   ngOnInit(): void {
@@ -39,6 +42,12 @@ export class WorkspaceComponent implements OnInit {
         })
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.workspaceStateSubscription) {
+      this.workspaceStateSubscription.unsubscribe();
+    }
   }
 
   private retrieveProjects(): void {

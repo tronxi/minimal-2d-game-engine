@@ -44,5 +44,9 @@ export class ProjectService {
     window.open(url, '_blank');
   }
 
+  delete(project: Project) {
+    return this.http.delete(environment.url + "/project/" + project.name);
+  }
+
 
 }

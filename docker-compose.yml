@@ -17,7 +17,7 @@ services:
     build:
       context: minimal2d-game-engine-ui
     ports:
-      - "80:80"
+      - "81:80"
     networks: 
       - minimal-2d-game-engine-net
 
