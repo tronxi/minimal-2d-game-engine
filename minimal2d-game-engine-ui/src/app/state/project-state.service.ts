@@ -16,7 +16,4 @@ export class ProjectStateService {
   update(selectedEvent: SelectedEvent) {
     this._selectedEventState.next(selectedEvent);
   }
-
-  constructor() {
-  }
 }
