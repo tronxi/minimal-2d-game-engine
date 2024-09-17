@@ -43,7 +43,7 @@ public class GUIScreen extends Screen {
                             maybeElement.ifPresent(element ->
                                     //g.drawRect(element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize)
                                     //g.drawImage(image, element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize, null)
-                                    g.drawString(element.representation(), element.position().getWidth() * elementSize, element.position().getHeight() * elementSize));
+                                    g.drawString(element.representation(), element.position().getWidth() * elementSize, (element.position().getHeight() + 1) * elementSize));
                         }
                     }
                 }
