@@ -6,64 +6,60 @@ import dev.tronxi.engine.elements.Element;
 
 public class MainElement extends Element {
 
-  private int mustDown = 0;
-
-  public MainElement(String representation, Position position, Game game) {
-    super(representation, position, game);
-  }
-
-  @Override
-  public void start() {
-    registerForHandleInput(inputListener());
-  }
-
-  @Override
-  public void update() {
-    if (mustDown % 10 == 0) {
-      mustDown = 0;
-      if (!hasRepresentationDown("#")) {
-        position().down();
-        if (position().getHeight() == dimension().height()) {
-          game().initElements();
-          dimension().setWidthVisibleCenter(0);
-        }
-      }
+    public MainElement(String representation, Position position, Game game) {
+        super(representation, position, game);
     }
-    mustDown++;
-  }
 
-  @Override
-  public void handleInput(String key) {
-    switch (key) {
-      case "D" -> {
-        if (!hasRepresentationRight("#")) {
-          position().right();
-        }
-      }
-      case "A" -> {
-        if (!hasRepresentationLeft("#")) {
-          position().left();
-        }
-      }
-      case "W" -> {
-        if (hasRepresentationDown("#")) {
-          if (!hasRepresentationUp("#")) {
-            position().up();
-          }
-          if (!hasRepresentationUp("#")) {
-            position().up();
-          }
-          if (!hasRepresentationUp("#")) {
-            position().up();
-          }
-        }
-      }
-      case "Q" -> {
-        elements().add(
-            new ShotElement(">", new Position(position().getWidth(), position().getHeight()), game()));
-      }
+    @Override
+    public void start() {
+        registerForHandleInput(inputListener());
     }
-    dimension().setWidthVisibleCenter(position().getWidth());
-  }
+
+    @Override
+    public void update() {
+        if (millisecondsSinceLatestUpdate() >= 500) {
+            resetLastUpdate();
+            if (!hasRepresentationDown("#")) {
+                position().down();
+                if (position().getHeight() == dimension().height()) {
+                    game().initElements();
+                    dimension().setWidthVisibleCenter(0);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void handleInput(String key) {
+        switch (key) {
+            case "D" -> {
+                if (!hasRepresentationRight("#")) {
+                    position().right();
+                }
+            }
+            case "A" -> {
+                if (!hasRepresentationLeft("#")) {
+                    position().left();
+                }
+            }
+            case "W" -> {
+                if (hasRepresentationDown("#")) {
+                    if (!hasRepresentationUp("#")) {
+                        position().up();
+                    }
+                    if (!hasRepresentationUp("#")) {
+                        position().up();
+                    }
+                    if (!hasRepresentationUp("#")) {
+                        position().up();
+                    }
+                }
+            }
+            case "Q" -> {
+                elements().add(new ShotElement(">", new Position(position().getWidth(), position().getHeight()), game()));
+            }
+        }
+        dimension().setWidthVisibleCenter(position().getWidth());
+    }
 
 }
