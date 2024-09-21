@@ -16,7 +16,7 @@ public class CLIScreen extends Screen {
   @Override
   public void print() {
     CLIUtils.clear();
-    for (int height = 0; height < dimension.height(); height++) {
+    for (int height = dimension.startVisibleEight(); height < dimension.endVisibleEight(); height++) {
       for (int width = dimension.startVisibleWidth(); width < dimension.endVisibleWidth();
           width++) {
         Position currentPosition = new Position(width, height);

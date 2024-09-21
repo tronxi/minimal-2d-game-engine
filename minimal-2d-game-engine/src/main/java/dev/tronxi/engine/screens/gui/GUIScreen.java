@@ -35,7 +35,7 @@ public class GUIScreen extends Screen {
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
-                for (int height = 0; height < dimension.height(); height++) {
+                for (int height = dimension.startVisibleEight(); height < dimension.endVisibleEight(); height++) {
                     for (int width = dimension.startVisibleWidth(); width < dimension.endVisibleWidth(); width++) {
                         Position currentPosition = new Position(width, height);
                         if (dimension.isInDimension(currentPosition)) {

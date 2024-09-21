@@ -5,10 +5,14 @@ public class Dimension {
   private int height;
   private int widthVisibleSize;
   private int widthVisibleCenter;
+  private int heightVisibleSize;
+  private int heightVisibleCenter;
 
-  public Dimension(int widthVisibleSize, int widthVisibleCenter) {
+  public Dimension(int widthVisibleSize, int widthVisibleCenter, int heightVisibleSize, int heightVisibleCenter) {
     this.widthVisibleSize = widthVisibleSize;
     this.widthVisibleCenter = widthVisibleCenter;
+    this.heightVisibleSize = heightVisibleSize;
+    this.heightVisibleCenter = heightVisibleCenter;
   }
 
   public int width() {
@@ -27,12 +31,28 @@ public class Dimension {
     return widthVisibleCenter + (widthVisibleSize / 2);
   }
 
+  public int startVisibleEight() {
+    return heightVisibleCenter - (heightVisibleSize / 2);
+  }
+
+  public int endVisibleEight() {
+    return heightVisibleCenter + (heightVisibleSize / 2);
+  }
+
   public void setWidthVisibleSize(int widthVisibleSize) {
     this.widthVisibleSize = widthVisibleSize;
   }
 
   public void setWidthVisibleCenter(int widthVisibleCenter) {
     this.widthVisibleCenter = widthVisibleCenter;
+  }
+
+  public void setHeightVisibleSize(int heightVisibleSize) {
+    this.heightVisibleSize = heightVisibleSize;
+  }
+
+  public void setHeightVisibleCenter(int heightVisibleCenter) {
+    this.heightVisibleCenter = heightVisibleCenter;
   }
 
   public boolean isInDimension(Position position){
@@ -47,4 +67,5 @@ public class Dimension {
   public void setHeight(int height) {
     this.height = height;
   }
+
 }
