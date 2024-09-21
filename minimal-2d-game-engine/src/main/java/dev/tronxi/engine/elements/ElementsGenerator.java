@@ -22,6 +22,12 @@ public class ElementsGenerator {
         return readFile(fileLevel, elementsMap, game);
     }
 
+    public List<Element> generateForLevel(Properties properties, Game game, String fileLevel) {
+        String elementsDefinition = properties.getProperty("elementsDefinition");
+        Map<String, String> elementsMap = parseElementsDefinition(elementsDefinition);
+        return readFile(fileLevel, elementsMap, game);
+    }
+
     private List<Element> readFile(String fileLevel, Map<String, String> elementsMap, Game game) {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("levels/" + fileLevel);
         List<Element> elements = new CopyOnWriteArrayList<>();

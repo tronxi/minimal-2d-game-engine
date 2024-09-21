@@ -21,7 +21,7 @@ public class GUIScreen extends Screen {
         super(dimension, elements);
         int elementSize = 15;
         JFrame frame = new JFrame();
-        frame.setBounds(0, 0, 1400, 600);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
         try (InputStream imageStream = getClass().getResourceAsStream("/mario.png")) {
             if (imageStream == null) {
@@ -42,15 +42,15 @@ public class GUIScreen extends Screen {
                             Optional<Element> maybeElement = findElementByPosition(currentPosition);
                             maybeElement.ifPresent(element ->
                                     //g.drawRect(element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize)
-                                    //g.drawImage(image, element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize, null)
-                                    g.drawString(element.representation(), element.position().getWidth() * elementSize, (element.position().getHeight() + 1) * elementSize));
+                                    g.drawImage(image, element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize, null));
+                            //g.drawString(element.representation(), element.position().getWidth() * elementSize, (element.position().getHeight() + 1) * elementSize));
                         }
                     }
                 }
 
             }
         };
-        canvas.setSize(1400, 600);
+        canvas.setSize(frame.getWidth(), frame.getHeight());
         frame.add(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
