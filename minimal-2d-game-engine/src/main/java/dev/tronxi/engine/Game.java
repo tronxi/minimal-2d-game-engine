@@ -4,7 +4,6 @@ import dev.tronxi.engine.elements.Element;
 import dev.tronxi.engine.elements.ElementsGenerator;
 import dev.tronxi.engine.listeners.InputListener;
 import dev.tronxi.engine.screens.Screen;
-import dev.tronxi.engine.screens.cli.CLIScreen;
 import dev.tronxi.engine.screens.gui.GUIScreen;
 
 import javax.imageio.ImageIO;
@@ -78,7 +77,7 @@ public class Game {
         return Optional.ofNullable(sprites.get(sprite));
     }
 
-    public void setSprite(String spriteName) {
+    public void addSprite(String spriteName) {
         if (sprites.containsKey(spriteName)) return;
         Image image;
         try (InputStream imageStream = getClass().getResourceAsStream("/sprites/" + spriteName)) {

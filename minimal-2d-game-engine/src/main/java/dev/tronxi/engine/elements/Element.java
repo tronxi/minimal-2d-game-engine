@@ -98,7 +98,7 @@ public abstract class Element {
 
     protected void setSprite(String spriteName) {
         this.spriteName = spriteName;
-        game().setSprite(spriteName);
+        game().addSprite(spriteName);
     }
 
     public Optional<Image> getSprite() {
