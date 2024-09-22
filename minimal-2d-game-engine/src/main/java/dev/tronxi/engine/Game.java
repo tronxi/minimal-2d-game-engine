@@ -4,6 +4,7 @@ import dev.tronxi.engine.elements.Element;
 import dev.tronxi.engine.elements.ElementsGenerator;
 import dev.tronxi.engine.listeners.InputListener;
 import dev.tronxi.engine.screens.Screen;
+import dev.tronxi.engine.screens.cli.CLIScreen;
 import dev.tronxi.engine.screens.gui.GUIScreen;
 
 import javax.imageio.ImageIO;
@@ -27,7 +28,7 @@ public class Game {
         this.sprites = new HashMap<>();
         this.properties = properties;
         this.inputListener = inputListener;
-        dimension = new Dimension(80, 0, 20, 0);
+        dimension = new Dimension(80, 0, 40, 0);
         this.elements = new CopyOnWriteArrayList<>();
         //this.screen = new CLIScreen(dimension, elements);
         this.screen = new GUIScreen(dimension, elements);

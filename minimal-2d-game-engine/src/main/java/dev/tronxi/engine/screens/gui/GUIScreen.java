@@ -15,7 +15,7 @@ public class GUIScreen extends Screen {
 
     public GUIScreen(Dimension dimension, List<Element> elements) {
         super(dimension, elements);
-        int elementSize = 15;
+        int elementSize = 20;
         JFrame frame = new JFrame();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
@@ -23,14 +23,20 @@ public class GUIScreen extends Screen {
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
+                int visibleHeight = 0;
                 for (int height = dimension.startVisibleEight(); height < dimension.endVisibleEight(); height++) {
+                    int visibleWidth = 0;
                     for (int width = dimension.startVisibleWidth(); width < dimension.endVisibleWidth(); width++) {
                         Position currentPosition = new Position(width, height);
                         if (dimension.isInDimension(currentPosition)) {
                             Optional<Element> maybeElement = findElementByPosition(currentPosition);
-                            maybeElement.ifPresent(element -> drawElement(g, element, elementSize));
+                            int finalVisibleWidth = visibleWidth;
+                            int finalVisibleHeight = visibleHeight;
+                            maybeElement.ifPresent(element -> drawElement(g, element, elementSize, finalVisibleWidth, finalVisibleHeight));
                         }
+                        visibleWidth += 1;
                     }
+                    visibleHeight += 1;
                 }
 
             }
@@ -40,8 +46,8 @@ public class GUIScreen extends Screen {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void drawElement(Graphics g, Element element, int elementSize) {
-        element.getSprite().ifPresentOrElse(sprite -> g.drawImage(sprite, element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize, null), () -> g.drawString(element.representation(), element.position().getWidth() * elementSize, (element.position().getHeight() + 1) * elementSize));
+    private void drawElement(Graphics g, Element element, int elementSize, int visibleWidth, int visibleHeight) {
+        element.getSprite().ifPresentOrElse(sprite -> g.drawImage(sprite, visibleWidth * elementSize, visibleHeight * elementSize, elementSize, elementSize, null), () -> g.drawString(element.representation(), visibleWidth * elementSize, (visibleHeight + 1) * elementSize));
     }
 
     @Override
