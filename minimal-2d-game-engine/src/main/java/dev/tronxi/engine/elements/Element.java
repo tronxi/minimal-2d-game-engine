@@ -3,6 +3,7 @@ package dev.tronxi.engine.elements;
 import dev.tronxi.engine.Dimension;
 import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
+import dev.tronxi.engine.listeners.Event;
 import dev.tronxi.engine.listeners.InputListener;
 
 import java.awt.*;
@@ -17,7 +18,7 @@ public abstract class Element {
     private final String representation;
     private final Game game;
     private LocalDateTime lastUpdate;
-    private String spriteName;
+    protected String spriteName;
 
     public Element(String representation, Position position, Game game) {
         this.representation = representation;
@@ -55,7 +56,7 @@ public abstract class Element {
 
     public abstract void update();
 
-    public void handleInput(String key) {
+    public void handleInput(Event event) {
     }
 
     protected void registerForHandleInput(InputListener inputListener) {

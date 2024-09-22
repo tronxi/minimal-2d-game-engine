@@ -16,9 +16,9 @@ public class InputListener {
     this.registeredElements.add(element);
   }
 
-  public void handler(String key) {
+  public void handler(Event event) {
     for (Element element : registeredElements) {
-      element.handleInput(key);
+      element.handleInput(event);
     }
   }
 
