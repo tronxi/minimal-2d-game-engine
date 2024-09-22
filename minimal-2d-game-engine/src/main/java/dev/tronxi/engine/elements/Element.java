@@ -5,9 +5,11 @@ import dev.tronxi.engine.Game;
 import dev.tronxi.engine.Position;
 import dev.tronxi.engine.listeners.InputListener;
 
+import java.awt.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class Element {
 
@@ -15,12 +17,14 @@ public abstract class Element {
     private final String representation;
     private final Game game;
     private LocalDateTime lastUpdate;
+    private String spriteName;
 
     public Element(String representation, Position position, Game game) {
         this.representation = representation;
         this.position = position;
         this.game = game;
         this.lastUpdate = LocalDateTime.now();
+        this.spriteName = null;
     }
 
     public String representation() {
@@ -91,5 +95,13 @@ public abstract class Element {
         lastUpdate = LocalDateTime.now();
     }
 
+    protected void setSprite(String spriteName) {
+        this.spriteName = spriteName;
+        game().setSprite(spriteName);
+    }
+
+    public Optional<Image> getSprite() {
+        return game().getSprite(spriteName);
+    }
 
 }

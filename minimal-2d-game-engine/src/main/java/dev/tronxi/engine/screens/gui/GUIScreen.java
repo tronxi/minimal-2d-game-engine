@@ -5,17 +5,13 @@ import dev.tronxi.engine.Position;
 import dev.tronxi.engine.elements.Element;
 import dev.tronxi.engine.screens.Screen;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
 public class GUIScreen extends Screen {
     private final Canvas canvas;
-    private final Image image;
 
     public GUIScreen(Dimension dimension, List<Element> elements) {
         super(dimension, elements);
@@ -23,14 +19,6 @@ public class GUIScreen extends Screen {
         JFrame frame = new JFrame();
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
-        try (InputStream imageStream = getClass().getResourceAsStream("/mario.png")) {
-            if (imageStream == null) {
-                throw new RuntimeException("Image not found");
-            }
-            image = ImageIO.read(imageStream);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         canvas = new Canvas() {
             @Override
             public void paint(Graphics g) {
@@ -40,10 +28,7 @@ public class GUIScreen extends Screen {
                         Position currentPosition = new Position(width, height);
                         if (dimension.isInDimension(currentPosition)) {
                             Optional<Element> maybeElement = findElementByPosition(currentPosition);
-                            maybeElement.ifPresent(element ->
-                                    //g.drawRect(element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize)
-                                    g.drawImage(image, element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize, null));
-                            //g.drawString(element.representation(), element.position().getWidth() * elementSize, (element.position().getHeight() + 1) * elementSize));
+                            maybeElement.ifPresent(element -> drawElement(g, element, elementSize));
                         }
                     }
                 }
@@ -53,6 +38,10 @@ public class GUIScreen extends Screen {
         canvas.setSize(frame.getWidth(), frame.getHeight());
         frame.add(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    private void drawElement(Graphics g, Element element, int elementSize) {
+        element.getSprite().ifPresentOrElse(sprite -> g.drawImage(sprite, element.position().getWidth() * elementSize, element.position().getHeight() * elementSize, elementSize, elementSize, null), () -> g.drawString(element.representation(), element.position().getWidth() * elementSize, (element.position().getHeight() + 1) * elementSize));
     }
 
     @Override

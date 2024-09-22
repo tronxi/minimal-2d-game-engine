@@ -39,4 +39,5 @@ build/
 
 src/main/java/dev/tronxi/engine/elements/custom
 src/main/resources/levels/
+src/main/resources/sprites/
 src/main/resources/engine.properties
