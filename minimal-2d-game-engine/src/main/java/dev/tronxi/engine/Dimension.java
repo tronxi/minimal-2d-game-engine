@@ -1,5 +1,7 @@
 package dev.tronxi.engine;
 
+import dev.tronxi.engine.elements.Position;
+
 public class Dimension {
   private int width;
   private int height;
@@ -68,4 +70,11 @@ public class Dimension {
     this.height = height;
   }
 
+  public int getWidthVisibleCenter() {
+    return widthVisibleCenter;
+  }
+
+  public int getHeightVisibleCenter() {
+    return heightVisibleCenter;
+  }
 }

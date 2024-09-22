@@ -1,4 +1,4 @@
-package dev.tronxi.engine;
+package dev.tronxi.engine.elements;
 
 import java.util.Objects;
 

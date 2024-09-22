@@ -3,7 +3,7 @@ package dev.tronxi.engine.screens.cli;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import dev.tronxi.engine.Dimension;
-import dev.tronxi.engine.Position;
+import dev.tronxi.engine.elements.Position;
 import dev.tronxi.engine.elements.Element;
 import dev.tronxi.engine.listeners.InputListener;
 import dev.tronxi.engine.screens.Screen;

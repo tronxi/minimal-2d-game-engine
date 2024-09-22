@@ -1,7 +1,7 @@
 package dev.tronxi.engine.screens;
 
 import dev.tronxi.engine.Dimension;
-import dev.tronxi.engine.Position;
+import dev.tronxi.engine.elements.Position;
 import dev.tronxi.engine.elements.Element;
 import dev.tronxi.engine.listeners.InputListener;
 

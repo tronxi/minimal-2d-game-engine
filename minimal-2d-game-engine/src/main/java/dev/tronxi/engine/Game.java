@@ -1,5 +1,6 @@
 package dev.tronxi.engine;
 
+import dev.tronxi.engine.common.PropertiesReader;
 import dev.tronxi.engine.elements.Element;
 import dev.tronxi.engine.elements.ElementsGenerator;
 import dev.tronxi.engine.listeners.InputListener;
@@ -25,9 +26,9 @@ public class Game {
     private final Properties properties;
     private final Map<String, Image> sprites;
 
-    public Game(ScreenMode screenMode, Properties properties) {
+    public Game(ScreenMode screenMode) {
         this.sprites = new HashMap<>();
-        this.properties = properties;
+        this.properties = new PropertiesReader().read("engine.properties");
         this.inputListener = new InputListener();
         dimension = new Dimension(80, 0, 40, 0);
         this.elements = new CopyOnWriteArrayList<>();

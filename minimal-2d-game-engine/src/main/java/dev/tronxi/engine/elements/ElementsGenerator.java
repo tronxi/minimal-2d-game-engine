@@ -3,7 +3,6 @@ package dev.tronxi.engine.elements;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.tronxi.engine.Game;
-import dev.tronxi.engine.Position;
 import dev.tronxi.engine.common.EngineUtils;
 
 import java.io.*;
