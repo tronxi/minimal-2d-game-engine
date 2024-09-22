@@ -3,23 +3,26 @@ package dev.tronxi.engine.screens;
 import dev.tronxi.engine.Dimension;
 import dev.tronxi.engine.Position;
 import dev.tronxi.engine.elements.Element;
+import dev.tronxi.engine.listeners.InputListener;
+
 import java.util.List;
 import java.util.Optional;
 
 public abstract class Screen {
-  protected List<Element> elements;
-  protected Dimension dimension;
+    protected List<Element> elements;
+    protected Dimension dimension;
+    protected InputListener inputListener;
 
-  public Screen(Dimension dimension, List<Element> elements) {
-    this.dimension = dimension;
-    this.elements = elements;
-  }
+    public Screen(Dimension dimension, List<Element> elements, InputListener inputListener) {
+        this.dimension = dimension;
+        this.elements = elements;
+        this.inputListener = inputListener;
+    }
 
-  public abstract void print();
+    public abstract void print();
 
-  public Optional<Element> findElementByPosition(Position position) {
-    return elements.stream()
-        .filter(element -> element.position().equals(position)).findFirst();
-  }
+    public Optional<Element> findElementByPosition(Position position) {
+        return elements.stream().filter(element -> element.position().equals(position)).findFirst();
+    }
 
 }

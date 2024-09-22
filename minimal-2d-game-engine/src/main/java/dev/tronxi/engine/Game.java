@@ -4,6 +4,8 @@ import dev.tronxi.engine.elements.Element;
 import dev.tronxi.engine.elements.ElementsGenerator;
 import dev.tronxi.engine.listeners.InputListener;
 import dev.tronxi.engine.screens.Screen;
+import dev.tronxi.engine.screens.ScreenMode;
+import dev.tronxi.engine.screens.cli.CLIScreen;
 import dev.tronxi.engine.screens.gui.GUIScreen;
 
 import javax.imageio.ImageIO;
@@ -17,20 +19,34 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Game {
 
     private final Dimension dimension;
-    private final Screen screen;
+    private Screen screen;
     private final InputListener inputListener;
     private final List<Element> elements;
     private final Properties properties;
     private final Map<String, Image> sprites;
 
-    public Game(Properties properties, InputListener inputListener) {
+    public Game(ScreenMode screenMode, Properties properties) {
         this.sprites = new HashMap<>();
         this.properties = properties;
-        this.inputListener = inputListener;
+        this.inputListener = new InputListener();
         dimension = new Dimension(80, 0, 40, 0);
         this.elements = new CopyOnWriteArrayList<>();
-        //this.screen = new CLIScreen(dimension, elements);
-        this.screen = new GUIScreen(dimension, elements);
+        initScreen(screenMode);
+    }
+
+    private void initScreen(ScreenMode screenMode) {
+        switch (screenMode) {
+            case GUI -> initGUIScreen();
+            case CLI -> initCLIScreen();
+        }
+    }
+
+    private void initGUIScreen() {
+        this.screen = new GUIScreen(dimension, elements, inputListener);
+    }
+
+    private void initCLIScreen() {
+        this.screen = new CLIScreen(dimension, elements, inputListener);
     }
 
     public void initElements() {
@@ -91,7 +107,7 @@ public class Game {
         sprites.put(spriteName, image);
     }
 
-    public void removeSprite(String sprite) {
-        sprites.remove(sprite);
+    public void removeSprite(String spriteName) {
+        sprites.remove(spriteName);
     }
 }

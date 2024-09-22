@@ -3,6 +3,7 @@ package dev.tronxi.engine.screens.gui;
 import dev.tronxi.engine.Dimension;
 import dev.tronxi.engine.Position;
 import dev.tronxi.engine.elements.Element;
+import dev.tronxi.engine.listeners.InputListener;
 import dev.tronxi.engine.screens.Screen;
 
 import javax.swing.*;
@@ -13,10 +14,11 @@ import java.util.Optional;
 public class GUIScreen extends Screen {
     private final Canvas canvas;
 
-    public GUIScreen(Dimension dimension, List<Element> elements) {
-        super(dimension, elements);
+    public GUIScreen(Dimension dimension, List<Element> elements, InputListener inputListener) {
+        super(dimension, elements, inputListener);
         int elementSize = 20;
         JFrame frame = new JFrame();
+        frame.addKeyListener(new GUIKeyListener(inputListener));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setVisible(true);
         canvas = new Canvas() {
